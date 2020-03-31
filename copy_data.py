@@ -25,3 +25,4 @@ copyfile(os.path.join(orig_folder, r'geo/dpc_province_latest.geojson'), os.path.
 
 # Copia report
 print("Copia Report")
+copyfile(os.path.join(orig_folder, r'report/report.pdf'), os.path.join(dest_folder,  r'report/report.pdf'))
