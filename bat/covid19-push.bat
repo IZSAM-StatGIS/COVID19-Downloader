@@ -7,4 +7,4 @@ call git add .
 call git commit -m "Scheduled data update"
 call git push
 
-pause
+:: pause
