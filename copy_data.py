@@ -27,4 +27,4 @@ copyfile(os.path.join(orig_folder, r'geo/dpc_province_latest.geojson'), os.path.
 print("Copia Report")
 copyfile(os.path.join(orig_folder, r'report/report.pdf'), os.path.join(dest_folder,  r'report/report.pdf'))
 print("Copia dati analisi IZSAM")
-copyfile(os.path.join(orig_folder, r'izs_dati/COVID_IZSAM.csv'), os.path.join(dest_folder,  r'izs_dati/COVID_IZSAM.csv'))
+copyfile(os.path.join(orig_folder, r'izs_dati/COVID_IZSAM.csv'), os.path.join(dest_folder,  r'izs-dati/COVID_IZSAM.csv'))
