@@ -41,9 +41,14 @@ result_df = result_df.reindex(columns=['AGGIORNAMENTO','CODICE_ISTAT','COMUNE','
 # print(result_df)
 
 # Genera il file csv giornaliero (si può evitare di caricarlo sul repo)
+# ######################################################################
 result_df.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_'+str(data_aggiornamento)+'.csv'), index=None)
 
 # Genera il file csv complessivo da caricare sul repo
+# ######################################################################
+if os.path.isfile(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_TOT.csv')):
+    os.remove(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_TOT.csv'))
+
 esiti_files = []
 for root, dir, files in os.walk(os.path.join(dest_folder,'izs-dati')):
     for file in files:
