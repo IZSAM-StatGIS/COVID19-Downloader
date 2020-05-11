@@ -3,6 +3,7 @@
 # che viene rigenerato ogni mattina alle 9:20
 
 import os
+import chardet
 import pandas as pd
 from datetime import date, timedelta
 
@@ -13,8 +14,12 @@ orig_folder = r"G:\COVEPI\Statistica_e_GIS\COVID19"
 # Destinazione
 dest_folder = r"D:\SVILUPPO\COVID19-Abruzzo"
 
+# Trova l'encoding del file di input
+with open(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'),'rb') as file:
+    enc = chardet.detect(file.read())['encoding']
+
 # Dataframe cumulato dei positivi
-df = pd.read_csv(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'))
+df = pd.read_csv(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'), encoding=enc)
 df_pos = df[df['ESITO'] == 'POS']
 df_pos = df_pos[df_pos['PROVINCIA'] == 'TE']
 grouped_df_pos = df_pos.groupby(['COMUNE','PROVINCIA','CODICE_ISTAT_COMUNE'])['ESITO'].count().to_frame('POSITIVI').reset_index()
