@@ -44,6 +44,8 @@ df_esaminati_by_asl = df_esaminati.groupby(['ASL_RICHIEDENTE'])['ESITO'].count()
 # Raggruppamento per ASL e DATA
 df_esaminati_by_asl_day = df_esaminati.groupby(['ASL_RICHIEDENTE','DATA_ARRIVO'])['ESITO'].count().to_frame('ESAMINATI').reset_index()
 
+df_esaminati_by_asl_day_stand_alone = df_esaminati.groupby(['ASL_RICHIEDENTE','DATA_ARRIVO','PRIMA_DATA_FRIMA_LAB'])['ESITO'].count().to_frame('ESAMINATI').reset_index()
+
 # Merge dei dati
 # #################
 df_by_asl = pd.merge(df_in_corso_by_asl,df_esaminati_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
@@ -63,12 +65,13 @@ df_by_asl_day['ESAMINATI'] = df_by_asl_day['ESAMINATI'].astype(int)
 df_by_asl_day['TOTALE'] = df_by_asl_day['IN_CORSO'] + df_by_asl_day['ESAMINATI']
 df_by_asl_day['AGGIORNAMENTO'] = data_aggiornamento
 
-#print(df_by_asl)
-#print(df_by_asl_day.head(10))
+# print(df_by_asl)
+# print(df_by_asl_day.head(10))
+# print(df_esaminati_by_asl_day_stand_alone.head(10))
 
 # Genera i file csv giornalieri 
 # #############################
-df_by_asl.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ALS_TOT_'+str(data_aggiornamento)+'.csv'), index=None)
-df_by_asl.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ALS_TOT_LATEST.csv'), index=None)
-df_by_asl_day.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ALS_GIORNALIERI_'+str(data_aggiornamento)+'.csv'), index=None)
-df_by_asl_day.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ALS_GIORNALIERI_LATEST.csv'), index=None)
+df_by_asl.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ASL_TOT_'+str(data_aggiornamento)+'.csv'), index=None)
+df_by_asl.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ASL_TOT_LATEST.csv'), index=None)
+df_by_asl_day.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ASL_GIORNALIERI_'+str(data_aggiornamento)+'.csv'), index=None)
+df_by_asl_day.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_ASL_GIORNALIERI_LATEST.csv'), index=None)
