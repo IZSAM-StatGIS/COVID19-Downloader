@@ -8,4 +8,6 @@ call python D:\SVILUPPO\COVID19-Downloader\summarize_by_comune.py
 
 call python D:\SVILUPPO\COVID19-Downloader\summarize_by_asl.py
 
+call python D:\SVILUPPO\COVID19-Downloader\summarize_by_prov.py
+
 :: pause

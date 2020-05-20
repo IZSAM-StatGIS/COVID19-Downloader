@@ -5,6 +5,7 @@
 import os
 import chardet
 import pandas as pd
+import numpy as np
 from datetime import date, timedelta
 
 data_aggiornamento = date.today() - timedelta(1)
@@ -44,8 +45,6 @@ df_esaminati_by_asl = df_esaminati.groupby(['ASL_RICHIEDENTE'])['ESITO'].count()
 # Raggruppamento per ASL e DATA
 df_esaminati_by_asl_day = df_esaminati.groupby(['ASL_RICHIEDENTE','DATA_ARRIVO'])['ESITO'].count().to_frame('ESAMINATI').reset_index()
 
-df_esaminati_by_asl_day_stand_alone = df_esaminati.groupby(['ASL_RICHIEDENTE','DATA_ARRIVO','PRIMA_DATA_FRIMA_LAB'])['ESITO'].count().to_frame('ESAMINATI').reset_index()
-
 # Merge dei dati
 # #################
 df_by_asl = pd.merge(df_in_corso_by_asl,df_esaminati_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
@@ -67,7 +66,7 @@ df_by_asl_day['AGGIORNAMENTO'] = data_aggiornamento
 
 # print(df_by_asl)
 # print(df_by_asl_day.head(10))
-# print(df_esaminati_by_asl_day_stand_alone.head(10))
+# print(df_esaminati_stand_alone)
 
 # Genera i file csv giornalieri 
 # #############################
