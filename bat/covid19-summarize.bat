@@ -10,4 +10,6 @@ call python D:\SVILUPPO\COVID19-Downloader\summarize_by_asl.py
 
 call python D:\SVILUPPO\COVID19-Downloader\summarize_by_prov.py
 
+call python D:\SVILUPPO\COVID19-Downloader\summarize_tempi_refertazione.py
+
 :: pause
