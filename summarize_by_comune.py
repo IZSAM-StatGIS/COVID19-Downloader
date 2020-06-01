@@ -50,13 +50,13 @@ if os.path.isfile(os.path.join(workspace,r'izs-dati/ESITI_COMUNE_TOT.csv')):
     os.remove(os.path.join(workspace,r'izs-dati/ESITI_COMUNE_TOT.csv'))
 
 esiti_files = []
-for root, dir, files in os.walk(os.path.join(dest_folder,'izs-dati')):
+for root, dir, files in os.walk(os.path.join(workspace,'izs-dati')):
     for file in files:
         if 'ESITI_COMUNE_' in file:
             print(os.path.join(root,file))
             esiti_files.append(os.path.join(root,file))
 
 df_combined = pd.concat(map(pd.read_csv, esiti_files),sort=False)
-df_combined.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_TOT.csv'), index=None)
+df_combined.to_csv(os.path.join(workspace,r'izs-dati/ESITI_COMUNE_TOT.csv'), index=None)
             
 
