@@ -3,27 +3,16 @@
 # che viene rigenerato ogni mattina alle 9:20
 
 import os
-import chardet
 import pandas as pd
 from datetime import date, timedelta
 
 data_aggiornamento = date.today() - timedelta(1)
 
-# Origine
-orig_folder = r"G:\COVEPI\Statistica_e_GIS\COVID19"
-# Destinazione
-dest_folder = r"D:\SVILUPPO\COVID19-Abruzzo"
+# Workspace
+workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 
 # Lettura dataset di partenza
-try:
-    df = pd.read_csv(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'))
-except:
-    with open(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'),'rb') as file:
-        enc = chardet.detect(file.read())['encoding']
-
-    df = pd.read_csv(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'), encoding=enc)
-
-df = pd.read_csv(os.path.join(orig_folder,'izs_dati/COVID_IZSAM.csv'))
+df = pd.read_csv(os.path.join(workspace,'izs_dati/COVID_IZSAM.csv'))
 
 # Dataframe cumulato dei positivi
 df_pos = df[df['ESITO'] == 'POS']
@@ -53,12 +42,12 @@ result_df = result_df.reindex(columns=['AGGIORNAMENTO','CODICE_ISTAT','COMUNE','
 
 # Genera il file csv giornaliero (si può evitare di caricarlo sul repo)
 # ######################################################################
-result_df.to_csv(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_'+str(data_aggiornamento)+'.csv'), index=None)
+result_df.to_csv(os.path.join(workspace,r'izs-dati/ESITI_COMUNE_'+str(data_aggiornamento)+'.csv'), index=None)
 
 # Genera il file csv complessivo da caricare sul repo
 # ######################################################################
-if os.path.isfile(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_TOT.csv')):
-    os.remove(os.path.join(dest_folder,r'izs-dati/ESITI_COMUNE_TOT.csv'))
+if os.path.isfile(os.path.join(workspace,r'izs-dati/ESITI_COMUNE_TOT.csv')):
+    os.remove(os.path.join(workspace,r'izs-dati/ESITI_COMUNE_TOT.csv'))
 
 esiti_files = []
 for root, dir, files in os.walk(os.path.join(dest_folder,'izs-dati')):
