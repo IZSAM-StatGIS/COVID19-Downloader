@@ -12,7 +12,7 @@ data_aggiornamento = date.today() - timedelta(1)
 workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 
 # Lettura dataset di partenza
-df = pd.read_csv(os.path.join(workspace,'izs_dati/COVID_IZSAM.csv'))
+df = pd.read_csv(os.path.join(workspace, r'izs-dati\COVID_IZSAM.csv'))
 
 # Dataframe cumulato dei positivi
 df_pos = df[df['ESITO'] == 'POS']

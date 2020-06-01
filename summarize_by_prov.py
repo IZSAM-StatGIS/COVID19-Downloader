@@ -10,7 +10,7 @@ workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 
 # Lettura dataset di partenza
 # ###########################
-df = pd.read_csv(os.path.join(workspace,'izs_dati/COVID_IZSAM.csv'))
+df = pd.read_csv(os.path.join(workspace, r'izs-dati\COVID_IZSAM.csv'))
 
 # Rimozione dei dati esterni alle ASL abruzzesi
 df = df.query("PROVINCIA in ('AQ','CH','PE','TE')")
