@@ -12,7 +12,7 @@ workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 df = pd.read_csv(os.path.join(workspace, r'izs-dati\COVID_IZSAM_SIERO.csv'))
 
 # Rimozione dei dati esterni alle ASL abruzzesi
-# df = df.query("ASL_RICHIEDENTE in ('AQ','CH','PE','TE')")
+df = df.query("ASL_RICHIEDENTE in ('AQ','CH','PE','TE')")
 df['ACCERTAMENTO'] = df['ACCERTAMENTO'].str.strip()
 
 # Esami sierologici in corso
