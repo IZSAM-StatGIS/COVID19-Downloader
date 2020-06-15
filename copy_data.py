@@ -29,7 +29,6 @@ copyfile(os.path.join(orig_folder, r'geo/dpc_province_latest.geojson'), os.path.
 print("Copia Report")
 copyfile(os.path.join(orig_folder, r'report/report.pdf'), os.path.join(dest_folder,  r'report/report.pdf'))
 print("Copia dati analisi IZSAM")
-# copyfile(os.path.join(orig_folder, r'izs_dati/COVID_IZSAM.csv'), os.path.join(dest_folder,  r'izs-dati/COVID_IZSAM.csv'))
 
 try:
     df = pd.read_csv(os.path.join(orig_folder, r'izs_dati/COVID_IZSAM.csv'))
@@ -39,6 +38,12 @@ except:
 
     df = pd.read_csv(os.path.join(orig_folder, r'izs_dati/COVID_IZSAM.csv'), encoding=enc)
 
+# Genera dataset tamponi
 filtered_df = df.query('MATERIALE_ESAMINATO == "TAMPONE DIAGNOSTICO"')
 covid_izsam_df = filtered_df.drop(['MATERIALE_ESAMINATO'], axis=1)
 covid_izsam_df.to_csv(os.path.join(dest_folder, r'izs-dati/COVID_IZSAM.csv'), index=None, encoding='utf-8')
+
+# Genera dataset sierologico
+siero_df = df.query("MATERIALE_ESAMINATO in ('SANGUE','SIERO')")
+covid_izsam_df_siero = siero_df.drop(['MATERIALE_ESAMINATO'], axis=1)
+covid_izsam_df_siero.to_csv(os.path.join(dest_folder, r'izs-dati/COVID_IZSAM_SIERO.csv'), index=None, encoding='utf-8')
