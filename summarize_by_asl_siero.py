@@ -79,15 +79,13 @@ df_conv_by_asl['NA'].fillna(0, inplace=True)
 df_conv_by_asl['NA'] = df_conv_by_asl['NA'].astype(int)
 
 df_by_asl = df_by_asl.drop(['ESITO'], axis=1)
-print(df_by_asl)
+# print(df_by_asl)
 df_conv_by_asl = df_conv_by_asl.drop(['ESITO'], axis=1)
-print(df_conv_by_asl)
+# print(df_conv_by_asl)
 
 # Genera i file csv giornalieri 
 # #############################
-'''
 df_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_'+str(data_aggiornamento)+'.csv'), index=None)
 df_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_LATEST.csv'), index=None)
 df_conv_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_CONV_'+str(data_aggiornamento)+'.csv'), index=None)
 df_conv_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_CONV_LATEST.csv'), index=None)
-'''
