@@ -10,9 +10,10 @@ workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 
 # Lettura dataset di partenza
 df = pd.read_csv(os.path.join(workspace, r'izs-dati\COVID_IZSAM_SIERO.csv'))
+df = df.fillna('NA')
 
 # Rimozione dei dati esterni alle ASL abruzzesi
-df = df.query("ASL_RICHIEDENTE in ('AQ','CH','PE','TE')")
+# df = df.query("ASL_RICHIEDENTE in ('AQ','CH','PE','TE')")
 df['ACCERTAMENTO'] = df['ACCERTAMENTO'].str.strip()
 
 # Esami sierologici in corso
@@ -84,7 +85,9 @@ print(df_conv_by_asl)
 
 # Genera i file csv giornalieri 
 # #############################
+'''
 df_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_'+str(data_aggiornamento)+'.csv'), index=None)
 df_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_LATEST.csv'), index=None)
 df_conv_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_CONV_'+str(data_aggiornamento)+'.csv'), index=None)
 df_conv_by_asl.to_csv(os.path.join(workspace,r'izs-dati/ESAMI_SIERO_CONV_LATEST.csv'), index=None)
+'''
