@@ -44,21 +44,25 @@ df_neg_conv_by_asl = df_neg_conv.groupby(['ASL_RICHIEDENTE'])['ESITO'].count().t
 # ##########################
 df_na = df.query("ESITO not in ('POS','NEG','IN CORSO', 'ANN') & CONVENZIONE_PRIVATO_S_N == 'N' & ACCERTAMENTO in ('SARS-CoV-2: Ricerca anticorpi','SARS-CoV-2: Ricerca anticorpi_IgGs1 e IgM')")
 df_na_conv = df.query("ESITO not in ('POS','NEG','IN CORSO', 'ANN') & CONVENZIONE_PRIVATO_S_N == 'S' & ACCERTAMENTO in ('SARS-CoV-2: Ricerca anticorpi','SARS-CoV-2: Ricerca anticorpi_IgGs1 e IgM')")
+print(df_na_conv.head())
+
 # Raggruppamento per ASL 
-df_na_by_asl = df_na.groupby(['ASL_RICHIEDENTE'])['ESITO'].value_counts(dropna=False).to_frame('NA').reset_index()
-df_na_conv_by_asl = df_na_conv.groupby(['ASL_RICHIEDENTE'])['ESITO'].value_counts(dropna=False).to_frame('NA').reset_index()
+# df_na_by_asl = df_na.groupby(['ASL_RICHIEDENTE'])['ESITO'].value_counts(dropna=False).to_frame('NA').reset_index()
+# df_na_conv_by_asl = df_na_conv.groupby(['ASL_RICHIEDENTE'])['ESITO'].value_counts(dropna=False).to_frame('NA').reset_index()
+
+df_na_by_asl = df_na.groupby(['ASL_RICHIEDENTE'])['ESITO'].count().to_frame('NA').reset_index()
+df_na_conv_by_asl = df_na_conv.groupby(['ASL_RICHIEDENTE'])['ESITO'].count().to_frame('NA').reset_index()
 
 # Merge dei dati
-# #################
-df_esaminati_by_asl = pd.merge(df_neg_by_asl,df_pos_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
-df_esaminati_by_asl = pd.merge(df_esaminati_by_asl,df_na_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
+# ##########################
+df_esaminati_by_asl = pd.merge(df_neg_by_asl, df_pos_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
+df_esaminati_by_asl = pd.merge(df_esaminati_by_asl, df_na_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
 
 df_esaminati_conv_by_asl = pd.merge(df_neg_conv_by_asl,df_pos_conv_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
-df_esaminati_conv_by_asl = pd.merge(df_esaminati_conv_by_asl,df_na_conv_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
+df_esaminati_conv_by_asl = pd.merge(df_esaminati_conv_by_asl, df_na_conv_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
 
 df_by_asl = pd.merge(df_in_corso_by_asl,df_esaminati_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
-df_conv_by_asl = pd.merge(df_in_corso_conv_by_asl,df_esaminati_conv_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
-
+df_conv_by_asl = pd.merge(df_in_corso_conv_by_asl, df_esaminati_conv_by_asl, how='outer', on=['ASL_RICHIEDENTE'])
 
 df_by_asl['IN_CORSO'].fillna(0, inplace=True)
 df_by_asl['IN_CORSO'] = df_by_asl['IN_CORSO'].astype(int)
@@ -78,10 +82,10 @@ df_conv_by_asl['NEGATIVI'] = df_conv_by_asl['NEGATIVI'].astype(int)
 df_conv_by_asl['NA'].fillna(0, inplace=True)
 df_conv_by_asl['NA'] = df_conv_by_asl['NA'].astype(int)
 
-df_by_asl = df_by_asl.drop(['ESITO'], axis=1)
-# print(df_by_asl)
-df_conv_by_asl = df_conv_by_asl.drop(['ESITO'], axis=1)
-# print(df_conv_by_asl)
+# df_by_asl = df_by_asl.drop(['ESITO'], axis=1)
+print(df_by_asl)
+# df_conv_by_asl = df_conv_by_asl.drop(['ESITO'], axis=1)
+print(df_conv_by_asl)
 
 # Genera i file csv giornalieri 
 # #############################
