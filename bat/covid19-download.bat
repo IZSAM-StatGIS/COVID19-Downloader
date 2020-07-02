@@ -4,6 +4,6 @@ call %root%\Scripts\activate.bat %root%
 
 call conda activate geocovid19
 
-call python D:\COVID19\COVID19-Downloader\download_data.py
+call python D:\Script\COVID19\COVID19-Downloader\download_data.py
 
 :: pause
