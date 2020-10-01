@@ -6,4 +6,4 @@ call conda activate geocovid19
 
 call python D:\Script\COVID19\COVID19-Downloader\download_data.py
 
-:: pause
+::pause
