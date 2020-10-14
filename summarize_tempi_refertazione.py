@@ -2,11 +2,12 @@ import os
 import pandas as pd
 import numpy as np
 from datetime import date, timedelta
+from config_paths import workspace
 
 data_aggiornamento = date.today() - timedelta(1)
 
 # Workspace
-workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
+# workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 
 # Lettura dataset di partenza
 # ###########################

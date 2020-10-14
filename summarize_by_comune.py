@@ -5,11 +5,12 @@
 import os
 import pandas as pd
 from datetime import date, timedelta
+from config_paths import workspace
 
 data_aggiornamento = date.today() - timedelta(1)
 
 # Workspace
-workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
+# workspace = r"D:\SVILUPPO\COVID19-Abruzzo"
 
 # Lettura dataset di partenza
 df = pd.read_csv(os.path.join(workspace, r'izs-dati\COVID_IZSAM.csv'))
