@@ -7,9 +7,6 @@ from shutil import copyfile
 import chardet
 from config_paths import orig_folder, dest_folder
 
-print(orig_folder)
-print(dest_folder)
-
 # Origine
 # orig_folder = r"G:\COVEPI\Statistica_e_GIS\COVID19"
 # Destinazione
