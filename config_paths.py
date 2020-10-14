@@ -1,5 +1,5 @@
 # Ambiente di esecuzione ('PROD' o 'TEST')
-execution_env = 'TEST' 
+execution_env = 'PROD' 
 # Percorso di origine dei file da elaborare
 orig_folder = r"G:\COVEPI\Statistica_e_GIS\COVID19"
 # Percorso di destinazione
